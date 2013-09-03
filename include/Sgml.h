@@ -36,8 +36,9 @@ class Sgml {
     
     public:
         
-        void read( const string &filename );
-        void beautify();
+        void load( const string &filename );
+        void save();
+        void saveAs( const string &filename );
 };
 
 #endif

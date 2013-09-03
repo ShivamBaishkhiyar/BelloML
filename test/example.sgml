@@ -1,0 +1,172 @@
+<book id="GGAD">
+  <bookinfo>
+    
+    <authorgroup>
+      <author>
+	<firstname>Havoc</firstname>
+	<surname>Pennington</surname>
+	<affiliation>
+	  <orgname>Red Hat Advanced Development Labs</orgname>
+	</affiliation>
+	<authorblurb>
+	  <para>
+	    <email>hp@redhat.com</email>
+	  </para>
+	</authorblurb>
+      </author>
+    </authorgroup>
+
+    <edition>First Release</edition>
+    <pubdate>1999</pubdate>
+    <copyright>
+      <year>1999</year>
+      <holder>New Riders Publishing</holder>
+    </copyright>
+    <isbn>
+      0-7357-0078-8
+    </isbn>
+
+    <publisher>
+	<publishername>New Riders Publishing</publishername>
+    </publisher>
+      
+
+    <legalnotice>
+      <para>
+	This material may be distributed only subject to the terms and
+        conditions set forth in the Open Publication License, v1.0 or later (the
+        latest version is presently available at <ulink url="
+        http://www.opencontent.org/openpub/"
+        type="http">http://www.opencontent.org/openpub/</ulink> )
+      </para>
+    </legalnotice>
+
+    <title>GTK+ / Gnome Application Development</title>
+
+  </bookinfo>
+      
+<!-- ############# Overview - part ############### -->
+
+  <part id="overview"><title>Overview</title>
+    <partintro>
+      <para> 
+       The first chapter of the book gives you an overview of GTK+ and Gnome
+       technologies. Chapters 2 and 3 rapidly cover the basics of GTK+
+       programming. These chapters move very quickly, and give you the
+       information you need to understand the remainder of the book. For a
+       gentler introduction to GTK+, you may wish to read the <emphasis>GTK+
+       Tutorial</emphasis> or Eric Harlow's book <emphasis>Developing Linux
+       Applications with GTK+ and GDK</emphasis>.  
+      </para>
+    </partintro>
+
+<!-- ############ Introduction - chapter ############# -->
+      &INTRO;
+
+<!-- ############ Glib - chapter ############# -->
+      &GLIB;
+
+<!-- ############ GTK - chapter ############# -->
+      &GTK;
+  </part>
+
+<!-- ############ Building Apps - part ############# -->
+
+  <part id="build-app"><title>Building a Gnome Application</title>
+
+    <partintro>
+      <para>
+       With the basic concepts out of the way, you're ready to start building a
+       full-scale Gnome application. This part of the book walks you through the
+       creation of a generic application skeleton: a source tree using
+       <application>automake</application> and
+       <application>autoconf</application>, argument parsing, session
+       management, internationalization, the main window, dialogs, toolbars, and
+       menubars. Many examples in Part 2 come from a simple application called
+       "GnomeHello"; the source code for this application is included in the
+       back of the book.  </para> <para> Of course the "meat" of the application
+       is up to you; but in Part 3 of the book we'll cover a range of library
+       features you can use to develop it.  
+      </para>
+    </partintro>
+
+<!-- ############ Source tree - chapter ############# -->
+
+      &SOURCETREE;
+
+<!-- ############ Startup - chapter ############# -->
+      &STARTUP;
+
+<!-- ############ Main - chapter ############# -->
+      &MAIN;
+
+<!-- ############ Dialogs - chapter ############# -->
+      &DIALOGS;
+
+<!-- ############ Checklist - chapter ############# -->
+      &CHECKLIST    
+  </part>
+
+<!-- ############ Advanced GTK/GNOME - part ############# -->
+
+  <part id="advanced"><title>Advanced GTK+/Gnome Techniques</title>
+
+    <partintro>
+      <para>
+	The previous part got you started with a skeletal application. This
+	part of the book describes features available to the Gnome developer as
+	she begins to implement the main functionality of the program. The first
+	few chapters in this part cover some useful GTK+ details. The later
+	chapters branch out to describe facilities unique to Gnome. You may not
+	use all the tools described here for a given application, but you will
+	probably use many of them.  
+      </para>      
+    </partintro>
+
+<!-- ############ Objects - chapter ############# -->
+      &OBJECTS;
+
+<!-- ############ GDK - chapter ############# -->
+      &GDK;
+
+<!-- ############ Custom GTK Widget - chapter ############# -->
+      &CUSTOMWIDGET;
+
+<!-- ############ Canvas - chapter ############# -->
+      &CANVAS;
+
+<!-- ############ Canvas Item - chapter ############# -->
+      &CANVASITEM;
+  </part>
+
+<!-- ############ Appendices - part ############# -->
+
+  <part id="appendices">
+    <title>Appendices</title>
+
+    <partintro>
+      <para>
+	Appendix A describes the GTK+/Gnome object hierarchy; it should help you
+	find the widget you need for a given application. Appendix B is a guide to
+	the GTK+ and Gnome header files. Appendix C answers some frequently asked
+	questions; Appendix D points you to some useful online resources; and
+	Appendix E contains code listings for examples used in the book.  
+      </para>
+    </partintro>
+    <!--######### Appendix A ######### -->
+      &HIERARCHY;
+    <!--######### Appendix B ######### -->
+      &HEADERS;
+    <!--######### Appendix C ######### -->
+      &FAQS;
+    <!--######### Appendix D ######### -->
+      &ONLINE;
+    <!--######### Appendix E ######### -->
+      &LISTING;
+  </part>
+</book>
+
+
+
+
+

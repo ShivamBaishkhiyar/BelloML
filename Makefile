@@ -30,10 +30,12 @@ APPPATH = app
 OBJS = build/obj/
 BIN  = build/bin/
 INCLUDES = -Iinclude
+LOCALLIB =
 LIB = 
 
 RES = rc
-OPTFLAGS = -Os
+#OPTFLAGS = -Os
+OPTFLAGS = -O3
 CFLAGS = $(INCLUDES) ${OPTFLAGS} -Wall -pedantic-errors
 OSTYPE = $(shell gcc -dumpmachine)
 EXEC = myapp.exe
@@ -46,15 +48,16 @@ endif
 
 ifneq (,$(findstring mingw,$(OSTYPE)))
     OSTYPE = Windows
-    LIB := ${LIB}
-    INCLUDES := ${INCLUDES} -I'C:\Arquivos de programas\boost_1_53_0'
-    CFLAGS := ${CFLAGS} -lboost_regex-mgw47-mt-1_53 -L'C:\Arquivos de programas\boost_1_53_0\stage\lib'
+    LIB := ${LIB} -L'C:\Users\xxx\My things\public\boost_1_54_0\stage\lib' -lboost_regex-mgw47-mt-1_54
+    INCLUDES := ${INCLUDES} -I'C:\Users\xxx\My things\public\boost_1_54_0'
 else
     ifneq (,$(findstring linux,$(OSTYPE)))
         OSTYPE = Linux
     else
         ifneq (,$(findstring freebsd,$(OSTYPE)))
             OSTYPE = FreeBSD
+            LIB := ${LIB} -L'/usr/home/enzo/boost_1_54_0/stage/lib' -lboost_regex
+            INCLUDES := ${INCLUDES} -I'/usr/home/enzo/boost_1_54_0'
         else
             ifneq (,$(findstring solaris,$(OSTYPE)))
                 OSTYPE = Solaris
@@ -76,9 +79,9 @@ define compile
     @$(CXX) $^ -c -o $(OBJS)$@.o $(CFLAGS)
 endef
 
-all: main Sgml
+all: clean main Sgml
 	@echo Linking...
-	@$(CXX) -o $(BIN)$(EXEC) $(OBJS)* $(CFLAGS)
+	@$(CXX) -o $(BIN)$(EXEC) $(OBJS)* $(LIB) $(CFLAGS)
 	@strip $(BIN)$(EXEC)
 
 main: main.cpp

@@ -29,11 +29,11 @@
 
 #include <cstdlib>
 
-int main() {
+int main( int argc, char* argv[] ) {
     
     Sgml obj;
-    obj.read( "C:\\Documents and Settings\\xxx\\BelloSGML\\test\\test.sgm" );
-    obj.beautify();
+    obj.load( argv[1] );
+    obj.saveAs( argv[2] );
     
     return EXIT_SUCCESS;
 }

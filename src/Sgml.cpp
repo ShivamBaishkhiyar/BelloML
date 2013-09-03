@@ -30,32 +30,217 @@
 #include <iostream>
 #include <fstream>
 #include <streambuf>
+#include <vector>
+#include <stdexcept>
 
 #include <boost/regex.hpp>
-
-using std::cout;
-using std::endl;
-using std::ifstream;
+#include <boost/lambda/lambda.hpp>
+#include <boost/algorithm/string.hpp>
 
 namespace {
+    using namespace std;
+    using namespace boost;
+    
+    string filename;
     string content;
+    vector<string> lines;
+    
+    void removeLinebreaks();
+    void replaceAnyNumberSpacesWithSingleSpace();
+    void replaceAllTabsWithSingleSpace();
+    const vector<string> wrapText( string text, const size_t &width );
+    const string getComment();
+    const string getElement();
+    const string getText();
+    void sgmlNormalize();
+    void indentSgml();
+    void beautify();
+    
     
     void removeLinebreaks() {
         // Unix \n - Windows \r\n - MacOSX \r
         string newtext = "";
-        boost::regex expression("\n|\r\n|\r");
-        content = boost::regex_replace( content, expression, newtext );
+        regex expression("\n|\r\n|\r");
+        content = regex_replace( content, expression, newtext );
+    }
+    
+    void replaceAnyNumberSpacesWithSingleSpace() {
+        using namespace lambda;
+        string buffer;
+        unique_copy( content.begin(), content.end(), back_inserter( buffer ), _1 == ' ' && _2 == ' ' );
+        content = buffer;
+    }
+    
+    void replaceAllTabsWithSingleSpace() {
+        replace_all( content, "\t", " " );
+    }
+    
+    const vector<string> wrapText( string text, const size_t &width ) {
+        vector<string> lines;
+        string::size_type spacePos;
+        
+        while ( !text.empty() ) {
+            spacePos = text.rfind( ' ', width );
+            
+            if ( spacePos == string::npos || text.size() <= width ) {
+                lines.push_back( text );
+                break;
+            } else {
+                if ( spacePos == string::npos ) {
+                    spacePos = text.find( ' ', width );
+                }
+                
+                if ( spacePos != string::npos ) {
+                    lines.push_back( text.substr( 0, spacePos + 1 ) );
+                    text.erase( 0, spacePos + 1 );
+                }
+            }
+        }
+        return lines;
+    }
+    
+    const string getComment() {
+        size_t startPos = content.find( "<!--" );
+        if ( startPos == 0 ) {
+            size_t endPos = content.find( "-->" );
+            if ( endPos != string::npos ) {
+                string buffer = content.substr( 0, endPos + 3 );
+                content.erase( 0, endPos + 3 );
+                return buffer;
+            } else {
+                throw runtime_error( "Error: bad formed XML file." );
+            }
+        }
+        return "";
+    }
+    
+    const string getElement() {
+        size_t startPos = content.find_first_of( "<" );
+        if ( startPos == 0 ) {
+            size_t endPos = content.find_first_of( ">" );
+            if ( endPos != string::npos ) {
+                string buffer = content.substr( 0, endPos + 1 );
+                content.erase( 0, endPos + 1 );
+                return buffer;
+            } else {
+                throw runtime_error( "Error: bad formed XML file." );
+            }
+        }
+        return "";
+    }
+    
+    const string getText() {
+        size_t startPos = content.find_first_of( "<" );
+        if ( startPos > 0 ) {
+            string buffer = content.substr( 0, startPos );
+            content.erase( 0, startPos );
+            return buffer;
+        }
+        return "";
+    }
+    
+    void sgmlNormalize() {
+        string buffer;
+        vector<string> vctText;
+        
+        while ( !content.empty() ) {
+            trim( content );
+            vctText.clear();
+            
+            buffer = getComment();
+            if ( !buffer.empty() ) {
+                vctText = wrapText( buffer, 80 );
+                lines.insert( lines.end(), vctText.begin(), vctText.end() );
+            } else {
+                buffer = getElement();
+                if ( !buffer.empty() ) {
+                    lines.push_back( buffer );
+                } else {
+                    buffer = getText();
+                    vctText = wrapText( buffer, 80 );
+                    lines.insert( lines.end(), vctText.begin(), vctText.end() );
+                }
+            }
+        }
+    }
+    
+    void indentSgml() {
+        int indentNumber = 0;
+        vector<string> endTags;
+        
+        const string pattern = "</(.*)>";
+        regex regexPattern( pattern, regex::extended );
+        smatch what;
+        
+        for ( int index = lines.size() - 1; index >= 0; --index ) {
+            if ( regex_match( lines.at( index ), what, regexPattern ) ) {
+                lines.at( index ) = string( indentNumber++, '\t' ) + lines.at( index );
+                endTags.push_back( what[1] );
+            } else {
+                if( lines.at( index ).find( "<" + endTags.back() ) != string::npos ) {
+                    lines.at( index ) = string( --indentNumber, '\t' ) + lines.at( index );
+                    if( endTags.size() > 1 )
+                    endTags.pop_back();
+                } else {
+                    lines.at( index ) = string( indentNumber, '\t' ) + lines.at( index );
+                }
+            }
+        }
+    }
+    
+    void beautify() {
+        removeLinebreaks();
+        replaceAllTabsWithSingleSpace();
+        replaceAnyNumberSpacesWithSingleSpace();
+        sgmlNormalize();
+        indentSgml();
     }
 }
 
-void Sgml::read( const string &filename ) {
+void Sgml::load( const string &filename ) {
     ifstream file( filename.c_str() );
-    content.append( ( std::istreambuf_iterator<char>( file ) ), std::istreambuf_iterator<char>() );
+    content.append( ( istreambuf_iterator<char>( file ) ), istreambuf_iterator<char>() );
+    ::filename = filename;
+    file.close();
+    beautify();
 }
 
-void Sgml::beautify() {
-    removeLinebreaks();
+void Sgml::save() {
+    saveAs( filename.c_str() );
 }
+
+void Sgml::saveAs( const string &filename ) {
+    ofstream file( filename.c_str() );
+    ostream_iterator<string> output_iterator( file, "\n" );
+    copy( lines.begin(), lines.end() - 1, output_iterator );
+    file << lines.back();
+    file.close();
+}
+
+//~ void Sgml::beautify() const {
+    //~ removeLinebreaks();
+    //~ replaceAllTabsWithSingleSpace();
+    //~ replaceAnyNumberSpacesWithSingleSpace();
+    //~ sgmlNormalize();
+    //~ indentSgml();
+    
+    
+    
+    
+    
+    
+    
+    
+    //~ string line("test\ttest2\ttest3");
+    //~ vector<string> strs;
+    //~ split( strs, content, is_any_of( " " ) );
+    
+    //~ for( unsigned i = 0; i < strs.size(); ++i ) {
+        //~ cout << strs[i] << endl;
+    //~ }
+    
+    // cout << content;
+//~ }
 
 
 
