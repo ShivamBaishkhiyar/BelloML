@@ -38,7 +38,7 @@ RES = rc
 OPTFLAGS = -O3
 CFLAGS = $(INCLUDES) ${OPTFLAGS} -Wall -pedantic-errors
 OSTYPE = $(shell gcc -dumpmachine)
-EXEC = myapp.exe
+EXEC = BelloSGML.exe
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
@@ -48,8 +48,8 @@ endif
 
 ifneq (,$(findstring mingw,$(OSTYPE)))
     OSTYPE = Windows
-    LIB := ${LIB} -L'C:\Users\xxx\My things\public\boost_1_54_0\stage\lib' -lboost_regex-mgw47-mt-1_54
-    INCLUDES := ${INCLUDES} -I'C:\Users\xxx\My things\public\boost_1_54_0'
+    LIB := ${LIB} -L'C:\Users\xxx\mythings\public\boost_1_54_0\stage\lib' -lboost_regex-mgw47-mt-1_54
+    INCLUDES := ${INCLUDES} -I'C:\Users\xxx\mythings\public\boost_1_54_0'
 else
     ifneq (,$(findstring linux,$(OSTYPE)))
         OSTYPE = Linux

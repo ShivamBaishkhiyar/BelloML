@@ -75,6 +75,7 @@ namespace {
         replace_all( content, "\t", " " );
     }
     
+    
     const vector<string> wrapText( string text, const size_t &width ) {
         vector<string> lines;
         string::size_type spacePos;
@@ -86,54 +87,50 @@ namespace {
                 lines.push_back( text );
                 break;
             } else {
-                if ( spacePos == string::npos ) {
-                    spacePos = text.find( ' ', width );
-                }
-                
-                if ( spacePos != string::npos ) {
-                    lines.push_back( text.substr( 0, spacePos + 1 ) );
-                    text.erase( 0, spacePos + 1 );
-                }
+                lines.push_back( text.substr( 0, spacePos + 1 ) );
+                text.erase( 0, spacePos + 1 );
             }
         }
         return lines;
     }
     
     const string getComment() {
-        size_t startPos = content.find( "<!--" );
-        if ( startPos == 0 ) {
-            size_t endPos = content.find( "-->" );
-            if ( endPos != string::npos ) {
-                string buffer = content.substr( 0, endPos + 3 );
-                content.erase( 0, endPos + 3 );
+        size_t endPos = content.rfind( "-->" );
+        if ( endPos == content.size() - 3 ) {
+            size_t startPos = content.rfind( "<!--" );
+            if ( startPos != string::npos ) {
+                string buffer = content.substr( startPos, content.size() );
+                content.erase( startPos, content.size() );
                 return buffer;
             } else {
-                throw runtime_error( "Error: bad formed XML file." );
+                throw runtime_error( "Error: bad formed XML file1." );
             }
         }
         return "";
     }
     
     const string getElement() {
-        size_t startPos = content.find_first_of( "<" );
-        if ( startPos == 0 ) {
-            size_t endPos = content.find_first_of( ">" );
-            if ( endPos != string::npos ) {
-                string buffer = content.substr( 0, endPos + 1 );
-                content.erase( 0, endPos + 1 );
+        size_t endPos = content.find_last_of( ">" );
+        if ( endPos == content.size() - 1 ) {
+            size_t startPos = content.find_last_of( "<" );
+            // cout << content.substr( startPos, content.size() ) << endl;
+            if ( startPos != string::npos ) {
+                string buffer = content.substr( startPos, content.size() );
+                content.erase( startPos, content.size() );
                 return buffer;
             } else {
-                throw runtime_error( "Error: bad formed XML file." );
+                throw runtime_error( "Error: bad formed XML file2." );
             }
         }
         return "";
     }
     
     const string getText() {
-        size_t startPos = content.find_first_of( "<" );
-        if ( startPos > 0 ) {
-            string buffer = content.substr( 0, startPos );
-            content.erase( 0, startPos );
+        size_t startPos = content.find_last_of( ">" );
+        if ( startPos < content.size() - 1 ) {
+            string buffer = content.substr( startPos + 1, content.size() );
+            trim( buffer );
+            content.erase( startPos + 1, content.size() );
             return buffer;
         }
         return "";
@@ -144,26 +141,27 @@ namespace {
         vector<string> vctText;
         
         while ( !content.empty() ) {
+            cout << content.size() << endl;
             trim( content );
             vctText.clear();
             
             buffer = getComment();
             if ( !buffer.empty() ) {
                 vctText = wrapText( buffer, 80 );
-                lines.insert( lines.end(), vctText.begin(), vctText.end() );
+                lines.insert( lines.begin(), vctText.begin(), vctText.end() );
             } else {
                 buffer = getElement();
                 if ( !buffer.empty() ) {
-                    lines.push_back( buffer );
+                    lines.insert( lines.begin(), buffer );
                 } else {
                     buffer = getText();
                     vctText = wrapText( buffer, 80 );
-                    lines.insert( lines.end(), vctText.begin(), vctText.end() );
+                    lines.insert( lines.begin(), vctText.begin(), vctText.end() );
                 }
             }
         }
     }
-    
+
     void indentSgml() {
         int indentNumber = 0;
         vector<string> endTags;
