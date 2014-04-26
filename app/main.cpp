@@ -43,42 +43,6 @@ const string trim( string text ) {
     return text.erase( text.find_last_not_of( whitespace ) + 1U );
 }
 
-const string removeDuplicates( string text, const string &duplicate ) {
-    while ( text.find( duplicate + duplicate ) != string::npos ) {
-        text.replace( text.find( duplicate + duplicate ), duplicate.length() * 2, duplicate );
-    }
-    return text;
-}
-
-const string convertDelimiterToPipe( string text, const string &delimiter ) {
-    size_t pos = 0;
-    pos = text.find( delimiter, pos );
-    
-    while ( pos != string::npos ) {
-        text.replace( pos, delimiter.size(), "|" );
-        ++pos;
-        pos = text.find( delimiter, pos );
-    }
-    return text;
-}
-
-const vector<string> split( string text, const string &delimiter ) {
-    vector<string> stringArray;
-    if ( text.find( delimiter ) != string::npos ) {
-        text = removeDuplicates( text, delimiter );
-        text = convertDelimiterToPipe( text, delimiter );
-        
-        string buffer;
-        istringstream str( text );
-        while ( getline( str, buffer, '|' ) ) {
-            stringArray.push_back( buffer );
-        }
-    } else {
-        stringArray.push_back( text );
-    }
-    return stringArray;
-}
-
 const vector<string> wrapText( string text, const size_t &width ) {
     vector<string> lines;
     string::size_type spacePos;
@@ -138,14 +102,21 @@ const string sortAttribute( string startTag ) {
     string start = tag.front() + " ";
     tag.erase( tag.begin() );
     if ( !tag.empty() ) {
-        tag.back() = tag.back().substr( 0, tag.back().size() - 1 );
+        if ( tag.back().find( "/>" ) != string::npos ) {
+            tag.back() = tag.back().substr( 0, tag.back().size() - 2 );
+        } else {
+            tag.back() = tag.back().substr( 0, tag.back().size() - 1 );
+        }
     }
     sort( tag.begin(), tag.end() );
     
     for(std::vector<string>::iterator it = tag.begin(); it != tag.end(); ++it) {
         start += *it + " ";
     }
-    if ( start.find( ">" ) == string::npos ) {
+
+    if ( startTag.find( "/>" ) != string::npos && start.find( "/>" ) == string::npos ) {
+        start = trim( start ) + "/>";
+    } else if ( start.find( ">" ) == string::npos ) {
         start = trim( start ) + ">";
     }
     return trim( start );
