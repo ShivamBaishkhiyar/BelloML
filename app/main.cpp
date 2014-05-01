@@ -128,7 +128,17 @@ void load( const string &filename ) {
     
     file.open( filename.c_str() );
     if ( file ) {
+        string filelineBuffer;
         while( getline( file, fileline ) ) {
+            fileline = trim(fileline);
+            if ( fileline[fileline.size() - 1] != '>' ) {
+                filelineBuffer += " " + fileline;
+                continue;
+            } else {
+                filelineBuffer += " " + fileline;
+                fileline = filelineBuffer;
+                filelineBuffer.clear();
+            }
             string text;
             
             size_t startpos;
