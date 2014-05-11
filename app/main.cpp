@@ -25,6 +25,8 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 --------------------------------------------------------------------------*/
 
+#include <charseq.h>
+
 #include <iostream>
 #include <sstream>
 #include <algorithm>
@@ -34,32 +36,9 @@
 #include <iterator>
 
 using namespace std;
+using namespace util;
 
 vector<string> line;
-
-const string trim( string text ) {
-    static const char whitespace[] = " \n\t\v\r\f";
-    text.erase( 0, text.find_first_not_of( whitespace ) );
-    return text.erase( text.find_last_not_of( whitespace ) + 1U );
-}
-
-const vector<string> wrapText( string text, const size_t &width ) {
-    vector<string> lines;
-    string::size_type spacePos;
-    
-    while ( !text.empty() ) {
-        spacePos = text.rfind( ' ', width );
-        
-        if ( spacePos == string::npos || text.size() <= width ) {
-            lines.push_back( text );
-            break;
-        } else {
-            lines.push_back( text.substr( 0, spacePos + 1 ) );
-            text.erase( 0, spacePos + 1 );
-        }
-    }
-    return lines;
-}
 
 const string sortAttribute( string startTag ) {
     if ( ( startTag.find( "<?" ) != string::npos || startTag.find( "<!" ) != string::npos ) ) {
@@ -78,7 +57,8 @@ const string sortAttribute( string startTag ) {
                 if ( counter == 3 ) {
                     counter = 0;
                     lastChar = '\0';
-                    tag.push_back( trim( buffer ) );
+                    trim( buffer );
+                    tag.push_back( buffer );
                     buffer.clear();
                 }
                 break;
@@ -98,7 +78,8 @@ const string sortAttribute( string startTag ) {
         buffer += startTag.at( index );
     }
     
-    tag.push_back( trim( buffer ) );
+    trim( buffer );
+    tag.push_back( buffer );
     string start = tag.front() + " ";
     tag.erase( tag.begin() );
     if ( !tag.empty() ) {
@@ -113,13 +94,14 @@ const string sortAttribute( string startTag ) {
     for(std::vector<string>::iterator it = tag.begin(); it != tag.end(); ++it) {
         start += *it + " ";
     }
-
+    
+    trim( start );
     if ( startTag.find( "/>" ) != string::npos && start.find( "/>" ) == string::npos ) {
-        start = trim( start ) + "/>";
+        start += "/>";
     } else if ( start.find( ">" ) == string::npos ) {
-        start = trim( start ) + ">";
+        start += ">";
     }
-    return trim( start );
+    return start;
 }
 
 void load( const string &filename ) {
@@ -130,7 +112,7 @@ void load( const string &filename ) {
     if ( file ) {
         string filelineBuffer;
         while( getline( file, fileline ) ) {
-            fileline = trim(fileline);
+            trim( fileline );
             if ( fileline[fileline.size() - 1] != '>' ) {
                 filelineBuffer += " " + fileline;
                 continue;
@@ -159,9 +141,9 @@ void load( const string &filename ) {
                         pos = startpos;
                     }
                 }
-                
-                text = trim( fileline.substr( 0, pos ) );
+                text = fileline.substr( 0, pos );
                 fileline.erase( 0, pos );
+                trim( text );
                 if ( !text.empty() ) {
                     
                     // concatenate text (pcdata) into a single line.
