@@ -25,6 +25,7 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 --------------------------------------------------------------------------*/
 
+#include <CommandLine.h>
 #include <charseq.h>
 
 #include <iostream>
@@ -198,11 +199,31 @@ void indentSgml() {
     }
 }
 
-int main( int argc, char* argv[] ) {
-    load( argv[1] );
-    indentSgml();
-    saveAs( argv[2] );
-}
+int main() {
+    environs::CommandLine commandLine;
+    commandLine.optionCaseInsensitive();
+    commandLine.setOptionPrefix( "--" );
+    
+    if( commandLine.hasOption( "in" ) && !commandLine.getOptionValue( "in" ).empty() ) {
+        load( commandLine.getOptionValue( "in" ) );
+        indentSgml();
+        
+        if( commandLine.hasOption( "spaces" ) && commandLine.getOptionValueAsInteger( "spaces" ) > 0 ) {
+            string spaces = string( commandLine.getOptionValueAsInteger( "spaces" ), ' ' );
 
-// g++ main.cpp -o bellosgml.exe -Os -static
-// strip bellosgml.exe
+            if ( commandLine.hasOption( "guides" ) ) {
+                spaces = "|" + spaces;
+            }
+
+            for ( unsigned i=0; i < line.size(); ++i ) {
+                replaceAll( line[i], "\t", spaces );
+            }
+        }
+        
+        if( commandLine.hasOption( "out" ) && !commandLine.getOptionValue( "out" ).empty() ) {
+            saveAs( commandLine.getOptionValue( "out" ) );
+        } else if ( commandLine.hasOption( "overwrite" ) ) {
+            saveAs( commandLine.getOptionValue( "in" ) );
+        }
+    }
+}

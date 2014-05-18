@@ -35,7 +35,6 @@ INCLUDE_DIR = -Iext/include
 OPTFLAGS = -Os
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 EXEC = bellosgml.exe
-LIBNAME = environs.a
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
@@ -60,7 +59,7 @@ else
                     OSTYPE = solaris
                 else
                     ifneq (,$(findstring darwin,$(OSTYPE)))
-                        OSTYPE = macosx
+                        OSTYPE = macos
                     else
                         $(error Operating System not found)
                     endif
