@@ -1,5 +1,5 @@
 ###BelloSGML
-Beautifiers for SGML, XML and HTML.
+Beautifier for SGML, XML and HTML.
 
 #####SYNOPSIS
 bellosgml.exe [options]
