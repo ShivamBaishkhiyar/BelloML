@@ -1,4 +1,5 @@
-###BelloSGML
+BelloSGML
+---------
 Beautifier for SGML, XML and HTML.
 
 #####SYNOPSIS
