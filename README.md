@@ -1,4 +1,4 @@
-<svg
+<body><svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -88,7 +88,7 @@
        style="font-size:43.84550095px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
        inkscape:connector-curvature="0" />
   </g>
-</svg>
+</svg></body>
 
 BelloSGML
 ---------
