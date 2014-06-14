@@ -19,15 +19,11 @@ A simple XML beautifier, that helps you making XML files easier read by human be
 
 #### OPTIONS
 
-__--in__ Specify a file to be beautifier.
-
-__--out__ Specify a file to be written.
-
-__--overwrite__ Overwrites the current XML input file.
-
-__--spaces__ Specify the indentation level with number of spaces (default indent is tab).
-
-__--guides__ Specify pipe char (vertical bar) to be guide lines used with simple editor.
+- ``--in``: Specify a file to be beautifier.
+- ``--out``: Specify a file to be written.
+- ``--overwrite``: Overwrites the current XML input file.
+- ``--spaces``: Specify the indentation level with number of spaces (default indent is tab).
+- ``--guides``: Specify pipe char (vertical bar) to be guide lines used with simple editor.
 
 #### EXAMPLES
 
