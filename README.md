@@ -2,7 +2,7 @@
 ---------
 _BelloSGML_: A beautifier for SGML, XML and HTML.
 
-### OPERATING SYSTEM SUPPORT
+#### OPERATING SYSTEM SUPPORT
 
 - [Windows](https://github.com/FreeSource/BelloSGML/blob/master/build/windows/bin/bellosgml.exe?raw=true)
 - [Linux](https://github.com/FreeSource/BelloSGML/blob/master/build/linux/bin/bellosgml.exe?raw=true)
@@ -11,13 +11,13 @@ _BelloSGML_: A beautifier for SGML, XML and HTML.
 - [Solaris](https://github.com/FreeSource/BelloSGML/blob/master/build/solaris/bin/bellosgml.exe?raw=true)
 - [OpenIndiana](https://github.com/FreeSource/BelloSGML/blob/master/build/openindiana/bin/bellosgml.exe?raw=true)
 
-### SYNOPSIS
+#### SYNOPSIS
 bellosgml.exe [options]
 
-### DESCRIPTION
+#### DESCRIPTION
 A simple XML beautifier, that helps you making XML files easier read by human beings.
 
-### OPTIONS
+#### OPTIONS
 
 __--in__ Specify a file to be beautifier.
 
@@ -29,7 +29,7 @@ __--spaces__ Specify the indentation level with number of spaces (default indent
 
 __--guides__ Specify pipe char (vertical bar) to be guide lines used with simple editor.
 
-### EXAMPLES
+#### EXAMPLES
 
 bellosgml.exe --in myfile.xml --out mynewfile.xml
 
@@ -41,9 +41,9 @@ bellosgml.exe --in myfile.xml --out mynewfile.xml --spaces 4 --guides
 
 bellosgml.exe --spaces 4 --out mynewfile.xml --guides --in myfile.xml
 
-### VERSION
+#### VERSION
 
 This document was last revised for BelloSGML version 1.00.  
 
-### AUTHOR
+#### AUTHOR
 Enzo Roberto Verlato <enzover@ig.com.br> is the principal author of BelloSGML.
