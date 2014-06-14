@@ -31,18 +31,12 @@ __--guides__ Specify pipe char (vertical bar) to be guide lines used with simple
 
 #### EXAMPLES
 
-````javascript
-
+````
 bellosgml.exe --in myfile.xml --out mynewfile.xml
-
 bellosgml.exe --in myfile.xml --overwrite
-
 bellosgml.exe --in myfile.xml --out mynewfile.xml --spaces 4
-
 bellosgml.exe --in myfile.xml --out mynewfile.xml --spaces 4 --guides
-
 bellosgml.exe --spaces 4 --out mynewfile.xml --guides --in myfile.xml
-
 ````
 
 #### VERSION
