@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html>
 <body><svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -89,6 +91,7 @@
        inkscape:connector-curvature="0" />
   </g>
 </svg></body>
+</html>
 
 BelloSGML
 ---------
