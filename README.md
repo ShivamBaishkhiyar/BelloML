@@ -1,6 +1,4 @@
 ![BelloSGML](https://rawgit.com/FreeSource/BelloSGML/master/test/bellosgml.svg)
-
-BelloSGML
 ---------
 Beautifier for SGML, XML and HTML.
 
