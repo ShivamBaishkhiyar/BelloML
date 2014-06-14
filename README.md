@@ -21,7 +21,7 @@ A simple XML beautifier, that helps you making XML files easier read by human be
 
 - ``--in``: Specify a file to be beautifier.
 - ``--out``: Specify a file to be written.
-- ``--overwrite``: Overwrites the current XML input file.
+- ``--overwrite``: Overwrites the current input file.
 - ``--spaces``: Specify the indentation level with number of spaces (default indent is tab).
 - ``--guides``: Specify pipe char (vertical bar) to be guide lines used with simple editor.
 
@@ -37,7 +37,4 @@ bellosgml.exe --spaces 4 --out mynewfile.xml --guides --in myfile.xml
 
 #### VERSION
 
-This document was last revised for BelloSGML version 1.00.  
-
-#### AUTHOR
-Enzo Roberto Verlato <enzover@ig.com.br> is the principal author of BelloSGML.
+This document was last revised for BelloSGML version 1.00.
