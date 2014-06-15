@@ -15,7 +15,7 @@ _BelloSGML_: A beautifier for SGML, XML and HTML.
 bellosgml.exe [options]
 
 #### DESCRIPTION
-A simple XML beautifier, that helps you making XML files easier read by human beings.
+A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
 
 #### OPTIONS
 
