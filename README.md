@@ -12,7 +12,7 @@ _BelloSGML_: A beautifier for SGML, XML and HTML.
 - [OpenIndiana](https://github.com/FreeSource/BelloSGML/blob/master/build/openindiana/bin/bellosgml.exe?raw=true)
 
 #### SYNOPSIS
-bellosgml.exe [options]... [FILE]...
+bellosgml.exe [OPTION]... [FILE]...
 
 #### DESCRIPTION
 A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
