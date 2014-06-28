@@ -1,6 +1,8 @@
 ![BelloSGML](https://rawgit.com/FreeSource/BelloSGML/master/test/bellosgml.jpg)
 ---------
-_BelloSGML_: A beautifier for SGML, XML and HTML.
+
+#### DESCRIPTION
+A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
 
 #### OPERATING SYSTEM SUPPORT
 
@@ -13,9 +15,6 @@ _BelloSGML_: A beautifier for SGML, XML and HTML.
 
 #### SYNOPSIS
 bellosgml.exe [OPTION]... [FILE]...
-
-#### DESCRIPTION
-A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
 
 #### OPTIONS
 
