@@ -188,7 +188,7 @@ void indentSgml() {
             line.at( index ) = string( indentNumber++, '\t' ) + line.at( index );
             endTags.push_back( line.at( index ).substr( 1 + indentNumber, line.at( index ).size() - indentNumber - 2 ) );
         } else {
-            if( line.at( index ).find( "<" + endTags.back() ) != string::npos ) {
+            if( line.at( index ).find( "<" + endTags.back() ) != string::npos && line.at( index ).find( "/>" ) == string::npos ) {
                 line.at( index ) = string( --indentNumber, '\t' ) + line.at( index );
                 if( endTags.size() > 1 )
                 endTags.pop_back();
