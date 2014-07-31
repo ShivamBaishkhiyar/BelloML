@@ -11,6 +11,7 @@ A simple markup language beautifier, that helps you making SGML, XML or HTML fil
 - [FreeBSD](https://github.com/FreeSource/BelloSGML/blob/master/build/freebsd/bin/bellosgml.exe?raw=true)
 - [MacOS](https://github.com/FreeSource/BelloSGML/blob/master/build/macos/bin/bellosgml.exe?raw=true)
 - [Solaris](https://github.com/FreeSource/BelloSGML/blob/master/build/solaris/bin/bellosgml.exe?raw=true)
+- [Haiku](https://github.com/FreeSource/BelloSGML/blob/master/build/haiku/bin/bellosgml.exe?raw=true)
 - [OpenIndiana](https://github.com/FreeSource/BelloSGML/blob/master/build/openindiana/bin/bellosgml.exe?raw=true)
 
 #### SYNOPSIS
