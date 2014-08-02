@@ -23,7 +23,7 @@ bellosgml.exe [OPTION]... [FILE]...
 - ``--out``: Specify a file to be written.
 - ``--overwrite``: Overwrites the current input file.
 - ``--spaces``: Specify the indentation level with number of spaces (default indent is tab).
-- ``--guides``: Specify pipe char (vertical bar) to be guide lines used with simple editor.
+- ``--guides``: Use pipe char (vertical bar) to be guide lines with simple editor.
 
 #### EXAMPLES
 
