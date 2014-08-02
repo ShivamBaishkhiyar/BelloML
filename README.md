@@ -1,4 +1,4 @@
-![BelloSGML](https://rawgit.com/FreeSource/BelloSGML/master/test/bellosgml.png)
+![BelloSGML](https://rawgit.com/FreeSource/BelloSGML/master/test/bellosgml.jpg)
 ---------
 
 #### DESCRIPTION
