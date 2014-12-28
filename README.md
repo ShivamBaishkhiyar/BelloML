@@ -1,10 +1,10 @@
-![BelloSGML](https://cdn.rawgit.com/FreeSource/BelloSGML/master/rc/bellosgml.jpg)
+![BelloSGML](https://cdn.rawgit.com/FreeSource/BelloSGML/Daisy/rc/bellosgml.jpg)
 ---------
 
 #### DESCRIPTION
 A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
 
-#### OPERATING SYSTEM SUPPORT
+#### OPERATING SYSTEM SUPPORT _[DOWNLOAD]_
 
 - [Windows](https://github.com/FreeSource/BelloSGML/blob/master/build/windows/bin/bellosgml.exe?raw=true)
 - [Linux](https://github.com/FreeSource/BelloSGML/blob/master/build/linux/bin/bellosgml.exe?raw=true)
@@ -19,22 +19,19 @@ bellosgml.exe [OPTION]... [FILE]...
 
 #### OPTIONS
 
-- ``--in``: Specify a file to be beautifier.
-- ``--out``: Specify a file to be written.
-- ``--overwrite``: Overwrites the current input file.
-- ``--spaces``: Specify the indentation level with number of spaces (default indent is tab).
-- ``--guides``: Use pipe char (vertical bar) to be guide lines with simple editor.
+- ``-i``: Specify the input file.
+- ``-o``: Specify the output file.
+- ``-r``: Replace the current input file.
+- ``-t``: Specify the tab indentation level with number of spaces.
 
 #### EXAMPLES
 
 ````
-bellosgml.exe --in myfile.xml --out mynewfile.xml
-bellosgml.exe --in myfile.xml --overwrite
-bellosgml.exe --in myfile.xml --out mynewfile.xml --spaces 4
-bellosgml.exe --in myfile.xml --out mynewfile.xml --spaces 4 --guides
-bellosgml.exe --spaces 4 --out mynewfile.xml --guides --in myfile.xml
+bellosgml.exe -i myfile.xml -o mynewfile.xml
+bellosgml.exe -i myfile.xml -r
+bellosgml.exe -i myfile.xml -r -t 4
 ````
 
 #### VERSION
 
-This document was last revised for BelloSGML version 1.00.
+This document was last revised for BelloSGML - Daisy 1.00.

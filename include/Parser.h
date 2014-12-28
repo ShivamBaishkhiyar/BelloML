@@ -25,34 +25,22 @@
     Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 --------------------------------------------------------------------------*/
 
-#include <CommandLine.h>
-#include <Parser.h>
+#ifndef PARSER_H
+#define PARSER_H
 
-#include <iostream>
-#include <fstream>
+#include <string>
 
-using namespace std;
+using std::string;
 
-int main() {
-    try {
-        environs::CommandLine commandLine;
-        commandLine.optionCaseInsensitive();
-        commandLine.setOptionPrefix( "-" );
+class Parser {
+    
+    public:
+        Parser();
         
-        Parser markup;
-        markup.load( commandLine.getOptionLongValue( "i" ) );
+        void load(  const string &filename ) const;
+        void saveAs(  const string &filename ) const;
+        void indent() const;
+        void setTab( const signed int &width ) const;
+};
 
-        markup.setTab( commandLine.getOptionValueAsInteger( "t" ) );
-
-
-        markup.indent();
-
-        if ( commandLine.hasOption( "r" ) ) {
-            markup.saveAs( commandLine.getOptionLongValue( "i" ) );
-        } else {
-            markup.saveAs( commandLine.getOptionLongValue( "o" ) );
-        }
-    } catch( string error ) {
-        cerr << "bellosgml: " << error << endl;
-    }
-}
+#endif

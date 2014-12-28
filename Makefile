@@ -33,10 +33,12 @@ OBJECT_DIR = build/${OSTYPE}/obj/
 LIBRARY_DIR = build/${OSTYPE}/lib/
 BINARY_DIR  = build/${OSTYPE}/bin/
 INCLUDE_DIR = -Iinclude -Iext/include
-OPTFLAGS = -Os
+# OPTFLAGS = -Os
+OPTFLAGS = -O1
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 LIBNAME = environs.a
 EXEC = bellosgml.exe
+
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
@@ -46,6 +48,7 @@ endif
 
 ifneq (,$(findstring mingw,$(OSTYPE)))
     OSTYPE = windows
+    CFLAGS := ${CFLAGS} -static
 else
     ifneq (,$(findstring linux,$(OSTYPE)))
         OSTYPE = linux
@@ -83,13 +86,16 @@ define compile
     @$(CXX) $^ -c -o $(OBJECT_DIR)$@.o $(CFLAGS)
 endef
 
-all: clean main
+all: clean main Parser
 	@echo Linking...
 	@$(CXX) -o $(BINARY_DIR)$(EXEC) $(OBJECT_DIR)* $(EXTLIBRARY_DIR)* $(CFLAGS)
 	@strip $(BINARY_DIR)$(EXEC)
 
 main: main.cpp
 	@echo Compiling on $(OSTYPE) $(subst -m,,$(BITS))BIT...
+	$(call compile,$@)
+
+Parser: Parser.cpp
 	$(call compile,$@)
 
 .PHONY: clean
