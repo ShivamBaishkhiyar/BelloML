@@ -41,12 +41,8 @@ int main() {
         
         Parser markup;
         markup.load( commandLine.getOptionLongValue( "i" ) );
-
         markup.setTab( commandLine.getOptionValueAsInteger( "t" ) );
-
-
         markup.indent();
-
         if ( commandLine.hasOption( "r" ) ) {
             markup.saveAs( commandLine.getOptionLongValue( "i" ) );
         } else {
