@@ -33,8 +33,7 @@ OBJECT_DIR = build/${OSTYPE}/obj/
 LIBRARY_DIR = build/${OSTYPE}/lib/
 BINARY_DIR  = build/${OSTYPE}/bin/
 INCLUDE_DIR = -Iinclude -Iext/include
-# OPTFLAGS = -Os
-OPTFLAGS = -O1
+OPTFLAGS = -Os
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 LIBNAME = environs.a
 EXEC = bellosgml.exe
