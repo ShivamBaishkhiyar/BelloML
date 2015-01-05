@@ -174,8 +174,9 @@ void Parser::load( const string &filename ) const {
         ifstream file;
         file.exceptions( ifstream::failbit | ifstream::badbit );
         file.open( filename.c_str() );
+        file.exceptions( ifstream::goodbit );
         
-        while( file.peek() != EOF && getline( file, line ) ) {
+        while( getline( file, line ) ) {
             trim( line );
             if ( isGreaterthansignAtEOL( line ) ) {
                 string text;
