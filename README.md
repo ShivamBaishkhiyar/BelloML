@@ -34,4 +34,4 @@ bellosgml.exe -i myfile.xml -r -t 4
 
 #### VERSION
 
-This document was last revised for BelloSGML - Daisy 1.00.
+This document was last revised for BelloSGML - Daisy 2.0.0

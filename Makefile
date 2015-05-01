@@ -27,17 +27,15 @@
 
 CXX = g++
 OSTYPE = $(shell gcc -dumpmachine)
-APP_DIR = app
-EXTLIBRARY_DIR = ext/lib/${OSTYPE}/
-OBJECT_DIR = build/${OSTYPE}/obj/
-LIBRARY_DIR = build/${OSTYPE}/lib/
-BINARY_DIR  = build/${OSTYPE}/bin/
-INCLUDE_DIR = -Iinclude -Iext/include
+EXTLIBRARY_DIR = os/${OSTYPE}/extlib/
+OBJECT_DIR = os/${OSTYPE}/build/obj/
+LIBRARY_DIR = os/${OSTYPE}/build/lib/
+BINARY_DIR  = os/${OSTYPE}/build/bin/
+INCLUDE_DIR = -Iinclude/local -Iinclude/ext
 OPTFLAGS = -Os
 CFLAGS = $(INCLUDE_DIR) ${OPTFLAGS} -Wall -pedantic-errors -std=c++98 $(BITS)
 LIBNAME = environs.a
 EXEC = bellosgml.exe
-
 
 ifneq (,$(findstring $(firstword $(subst -, ,$(shell gcc -dumpmachine))),mingw32 i686 i586 i386))
     BITS = -m32
