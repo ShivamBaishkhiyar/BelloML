@@ -38,15 +38,51 @@ int main() {
         environs::CommandLine commandLine;
         commandLine.optionCaseInsensitive();
         commandLine.setOptionPrefix( "-" );
-        
+
+        string inFile, outFile;
+
+
+        if ( commandLine.getParameter( 1 ) == commandLine.getParameter( 2 ) && !commandLine.getParameter( 1 ).empty() && !commandLine.getParameter( 2 ).empty() ) {
+            cerr << "bellosgml: The two following files are the same." << endl;
+            return 1;
+        }
+
+
+        ifstream file;
+        file.open( commandLine.getParameter( 1 ).c_str() );
+        if ( !file ) {
+            outFile = commandLine.getParameter( 1 );
+            file.open( commandLine.getParameter( 2 ).c_str() );
+            if ( !file ) {
+                cerr << "bellosgml: Input file could not be read." << endl;
+                return 1;
+            } else {
+                inFile = commandLine.getParameter( 2 );
+            }
+        } else {
+            inFile = commandLine.getParameter( 1 );
+
+            file.open( commandLine.getParameter( 2 ).c_str() );
+            if ( !file ) {
+                outFile = commandLine.getParameter( 2 );
+            } else {
+                cerr << "bellosgml: Output file exists." << endl;
+                return 1;
+            }
+        }
+        file.close();
+
         Parser markup;
-        markup.load( commandLine.getOptionLongValue( "i" ) );
+        // markup.load( commandLine.getOptionLongValue( "i" ) );
+        markup.load( inFile );
+        
+        
         markup.setTab( commandLine.getOptionValueAsInteger( "t" ) );
         markup.indent();
         if ( commandLine.hasOption( "r" ) ) {
-            markup.saveAs( commandLine.getOptionLongValue( "i" ) );
+            markup.saveAs( inFile );
         } else {
-            markup.saveAs( commandLine.getOptionLongValue( "o" ) );
+            markup.saveAs( outFile );
         }
     } catch( string error ) {
         cerr << "bellosgml: " << error << endl;
