@@ -15,21 +15,19 @@ A simple markup language beautifier, that helps you making SGML, XML or HTML fil
 - [OpenIndiana](https://github.com/FreeSource/BelloSGML/blob/master/build/openindiana/bin/bellosgml.exe?raw=true)
 
 #### SYNOPSIS
-bellosgml.exe [OPTION]... [FILE]...
+bellosgml.exe [FILE]... [OPTION]...
 
 #### OPTIONS
 
-- ``-i``: Specify the input file.
-- ``-o``: Specify the output file.
 - ``-r``: Replace the current input file.
 - ``-t``: Specify the tab indentation level with number of spaces.
 
 #### EXAMPLES
 
 ````
-bellosgml.exe -i myfile.xml -o mynewfile.xml
-bellosgml.exe -i myfile.xml -r
-bellosgml.exe -i myfile.xml -r -t 4
+bellosgml.exe myfile.xml mynewfile.xml
+bellosgml.exe myfile.xml -r
+bellosgml.exe myfile.xml -r -t 4
 ````
 
 #### VERSION
