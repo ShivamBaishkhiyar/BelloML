@@ -53,6 +53,7 @@ namespace {
     
     vector<string> line;
     string indentSymbol( "\t" );
+    int id = 0;
     
     const string sortAttribute( string startTag ) {
         if ( ( startTag.find( "<?" ) != string::npos || startTag.find( "<!" ) != string::npos ) ) {
@@ -89,6 +90,14 @@ namespace {
                     }
                     break;
             }
+            
+            if ( index+1 == startTag.length() ) {
+                char bf [33];
+                buffer +=  " uid=\"";
+                buffer +=  itoa (++id,bf,10);
+                buffer +=  "\"";
+            }
+
             buffer += startTag.at( index );
         }
         
