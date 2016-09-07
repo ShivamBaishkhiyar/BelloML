@@ -74,8 +74,8 @@ int main() {
 
         Parser markup;
         // markup.load( commandLine.getOptionLongValue( "i" ) );
+        markup.getKey( commandLine.hasOption( "u" ) );
         markup.load( inFile );
-        
         
         markup.setTab( commandLine.getOptionValueAsInteger( "t" ) );
         markup.indent();

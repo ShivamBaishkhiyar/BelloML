@@ -37,10 +37,11 @@ class Parser {
     public:
         Parser();
         
-        void load(  const string &filename ) const;
-        void saveAs(  const string &filename ) const;
+        void load( const string &filename ) const;
+        void saveAs( const string &filename ) const;
         void indent() const;
         void setTab( const signed int &width ) const;
+        void getKey( const bool &key ) const;
 };
 
 #endif

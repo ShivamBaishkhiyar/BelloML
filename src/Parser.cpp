@@ -53,11 +53,20 @@ namespace {
     
     vector<string> line;
     string indentSymbol( "\t" );
+    bool uid = false;
     int id = 0;
     
     const string sortAttribute( string startTag ) {
         if ( ( startTag.find( "<?" ) != string::npos || startTag.find( "<!" ) != string::npos ) ) {
             return startTag;
+        }
+        
+        if ( uid && startTag.find( "uid" ) == string::npos ) {
+            char bf [33];
+            string buffer = " uid=\"";
+            buffer += itoa( ++id, bf, 10 );
+            buffer += "\">";
+            startTag.replace( startTag.find(">"), buffer.length(), buffer );
         }
         
         unsigned counter = 3;
@@ -89,13 +98,6 @@ namespace {
                         lastChar = startTag.at( index );
                     }
                     break;
-            }
-            
-            if ( index+1 == startTag.length() ) {
-                char bf [33];
-                buffer +=  " uid=\"";
-                buffer +=  itoa (++id,bf,10);
-                buffer +=  "\"";
             }
 
             buffer += startTag.at( index );
@@ -261,4 +263,8 @@ void Parser::setTab( const signed int &width ) const {
     if ( width > 0 ) {
         indentSymbol = string( " " ) * ( width > 8 ? 8 : width );
     }
+}
+
+void Parser::getKey( const bool &uid ) const {
+    ::uid = uid;
 }

@@ -21,6 +21,7 @@ bellosgml.exe [FILE]... [OPTION]...
 
 - ``-r``: Replace the current input file.
 - ``-t``: Specify the tab indentation level with number of spaces.
+- ``-u``: Define a numeric unique id attribute (uid) to each element.
 
 #### EXAMPLES
 
@@ -28,6 +29,7 @@ bellosgml.exe [FILE]... [OPTION]...
 bellosgml.exe myfile.xml mynewfile.xml
 bellosgml.exe myfile.xml -r
 bellosgml.exe myfile.xml -r -t 4
+bellosgml.exe myfile.xml -r -u
 ````
 
 #### VERSION
