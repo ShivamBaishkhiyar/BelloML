@@ -3,6 +3,9 @@
 
 #### DESCRIPTION
 A simple markup language beautifier, that helps you making SGML, XML or HTML files easier read by human beings.
+HTML - Hyper Text Markup Language 
+XML - eXtensible Markup Language
+SGML - Standard Generalized Markup Language
 
 #### OPERATING SYSTEM SUPPORT _[DOWNLOAD]_
 
